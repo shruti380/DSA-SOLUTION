@@ -1,20 +1,27 @@
 class Solution {
+    void solve(vector<int>& nums, vector<vector<int>>& ans, int index, vector<int>& output) {
+        if (index >= nums.size()) {
+            ans.push_back(output);
+            return;
+        }
+
+        // Exclude current element
+        solve(nums, ans, index + 1, output);
+
+        // Include current element
+        output.push_back(nums[index]);
+        solve(nums, ans, index + 1, output);
+
+        // \U0001f519 Backtracking step (undo the last choice)
+        output.pop_back();
+    }
+
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        int n=nums.size();
-        vector<vector<int>>ans;
-        int subsets=1<<n;
-        for(int num=0;num<subsets;num++){
-            vector<int>list;
-            for(int i=0;i<n;i++){
-                if(num&(1<<i)){
-                    list.push_back(nums[i]);
-                }
-
-            }
-            ans.push_back(list);
-        }
-        return ans; 
-        
+        vector<vector<int>> ans;
+        vector<int> output;
+        int index = 0;
+        solve(nums, ans, index, output);
+        return ans;
     }
 };
