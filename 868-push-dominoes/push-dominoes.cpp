@@ -31,7 +31,7 @@ public:
             if(dominoes[i] != '.') {
                 ans[i] = dominoes[i];
             }
-            else if(Rdominoes[i] == -1 && Ldominoes[i] == -1) {
+            else if(Rdominoes[i]==Ldominoes[i]) {
                 ans[i] = '.';
             }
             else if(Rdominoes[i] == -1) {
